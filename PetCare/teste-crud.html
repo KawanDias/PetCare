@@ -1,0 +1,299 @@
+<!-- 
+  TESTE RÁPIDO DO CRUD
+  
+  Este arquivo permite testar o CRUD sem usar a interface gráfica.
+  Abra o Console do navegador (F12) e execute os comandos abaixo.
+-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste CRUD PetCare</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050505;
+            color: white;
+            font-family: "Segoe UI", sans-serif;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #00ffaa;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .code-block {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            color: #00ff88;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .code-block:hover {
+            background: rgba(0, 255, 136, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+        }
+
+        .description {
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+            border: none;
+            color: #050505;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 5px 10px 0;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+        }
+
+        .info {
+            background: rgba(0, 150, 255, 0.1);
+            border-left: 3px solid #00aaff;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #aaa;
+        }
+
+        .warning {
+            background: rgba(255, 150, 0, 0.1);
+            border-left: 3px solid #ffaa00;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🐾 Teste Rápido do CRUD PetCare</h1>
+
+        <div class="info">
+            💡 Dica: Abra o Console do navegador (F12 ou Ctrl+Shift+I) para ver os resultados dos comandos
+        </div>
+
+        <h2>1️⃣ Adicionar Pets de Teste</h2>
+        <p class="description">Clique para executar e adicionar 3 pets de exemplo ao localStorage</p>
+        <button onclick="adicionarPetsExemplo()">➕ Adicionar Pets de Exemplo</button>
+        <div class="code-block" onclick="copiar(this)">
+            // Adiciona 3 pets de exemplo
+            pets = [
+            { nome: 'Rex', especie: '🐶', idade: 3, vacinacao: 'Em dia', data: '2025-12-15', descricao: 'Cachorro muito
+            dócil', emoji: '🐶' },
+            { nome: 'Luna', especie: '🐱', idade: 2, vacinacao: 'Em atraso', data: '2024-06-10', descricao: 'Gata
+            carinhosa', emoji: '🐱' },
+            { nome: 'Hoppy', especie: '🐰', idade: 1, vacinacao: 'Em dia', data: '2025-10-01', descricao: 'Coelho
+            branco', emoji: '🐰' }
+            ]
+            localStorage.setItem('petsCrud', JSON.stringify(pets))
+        </div>
+
+        <h2>2️⃣ Visualizar Pets Salvos</h2>
+        <p class="description">Clique para ver todos os pets salvos no console</p>
+        <button onclick="verPets()">👁️ Ver Pets Salvos</button>
+        <div class="code-block" onclick="copiar(this)">
+            pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            console.log('Pets salvos:', pets)
+        </div>
+
+        <h2>3️⃣ Limpar Todos os Dados</h2>
+        <p class="description">Clique para apagar todos os pets e começar do zero</p>
+        <button onclick="limparDados()" style="background: linear-gradient(135deg, #ff6464, #ff8888);">🗑️ Limpar
+            Dados</button>
+        <div class="code-block" onclick="copiar(this)">
+            localStorage.removeItem('petsCrud')
+            console.log('Dados apagados!')
+        </div>
+
+        <h2>4️⃣ Editar um Pet</h2>
+        <p class="description">Execute no console para editar o primeiro pet</p>
+        <button onclick="editarPrimeiro()">✏️ Editar Primeiro Pet</button>
+        <div class="code-block" onclick="copiar(this)">
+            pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            if (pets.length > 0) {
+            pets[0].idade = 5
+            pets[0].vacinacao = 'Em atraso'
+            localStorage.setItem('petsCrud', JSON.stringify(pets))
+            console.log('Pet editado:', pets[0])
+            }
+        </div>
+
+        <h2>5️⃣ Deletar um Pet</h2>
+        <p class="description">Execute para remover o último pet da lista</p>
+        <button onclick="deletarUltimo()">🗑️ Deletar Último Pet</button>
+        <div class="code-block" onclick="copiar(this)">
+            pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            if (pets.length > 0) {
+            const deletado = pets.pop()
+            localStorage.setItem('petsCrud', JSON.stringify(pets))
+            console.log('Pet deletado:', deletado)
+            }
+        </div>
+
+        <h2>6️⃣ Contar Pets</h2>
+        <p class="description">Clique para saber quantos pets você tem</p>
+        <button onclick="contarPets()">📊 Contar Pets</button>
+        <div class="code-block" onclick="copiar(this)">
+            pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            console.log('Total de pets:', pets.length)
+        </div>
+
+        <h2>7️⃣ Pesquisar Pet por Nome</h2>
+        <p class="description">Pesquisa um pet pelo nome</p>
+        <input type="text" id="pesquisa" placeholder="Digite o nome..."
+            style="padding: 10px; border-radius: 6px; border: 1px solid #00ff88; background: rgba(0,255,136,0.1); color: white; width: 200px;">
+        <button onclick="pesquisarPet()">🔍 Pesquisar</button>
+        <div class="code-block" onclick="copiar(this)">
+            pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            const nome = 'Rex' // Mude para o nome desejado
+            const pet = pets.find(p => p.nome.toLowerCase() === nome.toLowerCase())
+            console.log('Pet encontrado:', pet || 'Não encontrado')
+        </div>
+
+        <div class="warning">
+            ⚠️ Aviso: Os dados são salvos em localStorage do navegador. Se você limpar o cache, todos os dados serão
+            perdidos!
+        </div>
+
+        <h2>🔗 Links Úteis</h2>
+        <button onclick="window.location.href='adocao.html'">🎯 Ir para CRUD de Adoção</button>
+        <button onclick="window.location.href='contato.html'">📧 Ir para Contato</button>
+        <button onclick="window.location.href='servicos.html'">💼 Ir para Serviços</button>
+        <button onclick="abrirConsole()">🖥️ Abrir Console (F12)</button>
+
+    </div>
+
+    <script>
+        function adicionarPetsExemplo() {
+            const pets = [
+                { nome: 'Rex', especie: '🐶', idade: 3, vacinacao: 'Em dia', data: '2025-12-15', descricao: 'Cachorro muito dócil', emoji: '🐶' },
+                { nome: 'Luna', especie: '🐱', idade: 2, vacinacao: 'Em atraso', data: '2024-06-10', descricao: 'Gata carinhosa', emoji: '🐱' },
+                { nome: 'Hoppy', especie: '🐰', idade: 1, vacinacao: 'Em dia', data: '2025-10-01', descricao: 'Coelho branco', emoji: '🐰' }
+            ]
+            localStorage.setItem('petsCrud', JSON.stringify(pets))
+            console.log('✅ 3 pets de exemplo adicionados!', pets)
+            alert('✅ Pets adicionados! Abra o Console (F12) para ver os detalhes.')
+        }
+
+        function verPets() {
+            const pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            console.log('📋 Pets salvos:', pets)
+            alert(`📋 Total de pets: ${pets.length}\n\nAbra o Console (F12) para ver os detalhes.`)
+        }
+
+        function limparDados() {
+            if (confirm('⚠️ Tem certeza? Isso vai deletar TODOS os pets!')) {
+                localStorage.removeItem('petsCrud')
+                console.log('🗑️ Todos os dados foram apagados!')
+                alert('🗑️ Dados apagados com sucesso!')
+            }
+        }
+
+        function editarPrimeiro() {
+            const pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            if (pets.length > 0) {
+                pets[0].idade = 5
+                pets[0].vacinacao = 'Em atraso'
+                localStorage.setItem('petsCrud', JSON.stringify(pets))
+                console.log('✏️ Pet editado:', pets[0])
+                alert(`✏️ Pet ${pets[0].nome} foi editado!\n\nIdade agora é: ${pets[0].idade}`)
+            } else {
+                alert('❌ Nenhum pet para editar!')
+            }
+        }
+
+        function deletarUltimo() {
+            const pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            if (pets.length > 0) {
+                const deletado = pets.pop()
+                localStorage.setItem('petsCrud', JSON.stringify(pets))
+                console.log('🗑️ Pet deletado:', deletado)
+                alert(`🗑️ Pet ${deletado.nome} foi deletado!`)
+            } else {
+                alert('❌ Nenhum pet para deletar!')
+            }
+        }
+
+        function contarPets() {
+            const pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            console.log('📊 Total de pets:', pets.length)
+            alert(`📊 Você tem ${pets.length} pet(s) cadastrado(s)!`)
+        }
+
+        function pesquisarPet() {
+            const nome = document.getElementById('pesquisa').value
+            if (!nome) {
+                alert('🔍 Digite um nome para pesquisar!')
+                return
+            }
+            const pets = JSON.parse(localStorage.getItem('petsCrud') || '[]')
+            const pet = pets.find(p => p.nome.toLowerCase().includes(nome.toLowerCase()))
+            if (pet) {
+                console.log('🎯 Pet encontrado:', pet)
+                alert(`🎯 Pet encontrado!\n\nNome: ${pet.nome}\nIdade: ${pet.idade} anos\nEspécie: ${pet.especie}`)
+            } else {
+                alert('❌ Pet não encontrado!')
+            }
+        }
+
+        function copiar(element) {
+            const texto = element.textContent
+            navigator.clipboard.writeText(texto)
+            alert('✅ Código copiado! Cole no console do navegador.')
+        }
+
+        function abrirConsole() {
+            console.log('🎉 Console aberto! Use os comandos acima para testar.')
+            alert('🎉 Console aberto! Pressione F12 ou Ctrl+Shift+I para ver.')
+        }
+
+        // Mensagem de boas-vindas
+        console.log('%c🐾 Bem-vindo ao Teste do CRUD PetCare!', 'color: #00ff88; font-size: 16px; font-weight: bold;')
+        console.log('Use os botões acima para testar as funcionalidades.')
+    </script>
+
+</body>
+
+</html>

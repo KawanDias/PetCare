@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PetCare</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-box {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            border-radius: 28px;
+            padding: 50px 40px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.45);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .auth-header .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .auth-header .logo span {
+            color: #00ff88;
+        }
+
+        .auth-header h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .auth-header p {
+            color: #b5b5b5;
+            font-size: 14px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #00ff88;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            border-color: #00ff88;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: #666;
+        }
+
+        .auth-button {
+            background: linear-gradient(135deg, #00ff88, #00ffaa);
+            border: none;
+            color: #050505;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.35s;
+            margin-top: 8px;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .auth-button:active {
+            transform: translateY(0);
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 24px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .auth-toggle a {
+            color: #00ff88;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .auth-toggle a:hover {
+            color: #00ffaa;
+        }
+
+        .hidden-form {
+            display: none;
+        }
+
+        .error-message {
+            background: rgba(255, 100, 100, 0.15);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            color: #ff6464;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            background: rgba(0, 255, 136, 0.15);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media(max-width: 600px) {
+            .auth-box {
+                padding: 40px 24px;
+            }
+
+            .auth-header .logo {
+                font-size: 36px;
+            }
+
+            .auth-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="blur"></div>
+
+    <div class="auth-container">
+        <div class="auth-box">
+
+            <div class="auth-header">
+                <div class="logo">Pet<span>Care</span></div>
+                <h1 id="authTitle">Entrar</h1>
+                <p id="authSubtitle">Acesse sua conta para continuar</p>
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <!-- FORMULÁRIO DE LOGIN -->
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="auth-button">Entrar</button>
+            </form>
+
+            <!-- FORMULÁRIO DE CADASTRO -->
+            <form id="registerForm" class="auth-form hidden-form">
+                <div class="form-group">
+                    <label for="registerName">Nome Completo</label>
+                    <input type="text" id="registerName" placeholder="Seu nome aqui" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Senha</label>
+                    <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">Confirmar Senha</label>
+                    <input type="password" id="registerPasswordConfirm" placeholder="••••••••" required minlength="6">
+                </div>
+
+                <button type="submit" class="auth-button">Criar Conta</button>
+            </form>
+
+            <!-- TOGGLE ENTRE LOGIN E CADASTRO -->
+            <div class="auth-toggle">
+                <span id="toggleText">Não tem conta? <a onclick="toggleForms()">Cadastre-se</a></span>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+
+</body>
+
+</html>

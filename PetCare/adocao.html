@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Adoção | PetCare</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <div class="bg"></div>
+  <div class="blur"></div>
+
+  <header>
+
+    <div class="logo">
+      Pet<span>Care</span>
+    </div>
+
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="adocao.html">Adoção</a>
+      <a href="contato.html">Contato</a>
+      <div class="nav-auth" id="navAuth">
+        <button class="nav-link" onclick="openAuthModal('login')">🔐 Login</button>
+        <button class="nav-link" onclick="openAuthModal('register')">✍️ Cadastro</button>
+      </div>
+    </nav>
+
+  </header>
+
+  <!-- MODAL DE AUTENTICAÇÃO -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+
+      <div class="auth-header">
+        <h2 id="modalTitle">Entrar</h2>
+        <p id="modalSubtitle">Acesse sua conta para continuar</p>
+      </div>
+
+      <div id="errorMessage" class="error-message"></div>
+      <div id="successMessage" class="success-message"></div>
+
+      <!-- FORMULÁRIO DE LOGIN -->
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="primary" style="width: 100%; margin-top: 8px;">Entrar</button>
+      </form>
+
+      <!-- FORMULÁRIO DE CADASTRO -->
+      <form id="registerForm" class="auth-form hidden-form">
+        <div class="form-group">
+          <label for="registerName">Nome Completo</label>
+          <input type="text" id="registerName" placeholder="Seu nome aqui" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerPassword">Senha</label>
+          <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6">
+        </div>
+
+        <div class="form-group">
+          <label for="registerPasswordConfirm">Confirmar Senha</label>
+          <input type="password" id="registerPasswordConfirm" placeholder="••••••••" required minlength="6">
+        </div>
+
+        <button type="submit" class="primary" style="width: 100%; margin-top: 8px;">Criar Conta</button>
+      </form>
+
+      <!-- TOGGLE ENTRE LOGIN E CADASTRO -->
+      <div class="auth-toggle">
+        <span id="toggleText">Não tem conta? <a onclick="toggleAuthForms()">Cadastre-se</a></span>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="page">
+
+    <h1 class="page-title">
+      Sistema de <span>Adoção</span>
+    </h1>
+
+    <p class="page-description">
+      Encontre um novo melhor amigo e ajude pets a encontrarem um lar.
+    </p>
+
+    <!-- FORMULÁRIO DE ADIÇÃO DE PETS -->
+    <div class="form-container">
+      <h2>Adicionar Novo Pet</h2>
+
+      <form id="petForm" class="pet-form">
+        <div class="form-group">
+          <label for="petName">Nome do Pet *</label>
+          <input type="text" id="petName" placeholder="Digite o nome do pet" required>
+        </div>
+
+        <div class="form-group">
+          <label for="petSpecies">Espécie *</label>
+          <select id="petSpecies" required>
+            <option value="">Selecione a espécie</option>
+            <option value="🐶">Cachorro</option>
+            <option value="🐱">Gato</option>
+            <option value="🐰">Coelho</option>
+            <option value="🐦">Pássaro</option>
+            <option value="🐹">Roedor</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="petAge">Idade (anos) *</label>
+          <input type="number" id="petAge" placeholder="Ex: 2" min="0" max="50" step="0.1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="petVaccineStatus">Status de Vacinação *</label>
+          <select id="petVaccineStatus" required>
+            <option value="">Selecione o status</option>
+            <option value="Em dia">Em dia</option>
+            <option value="Em atraso">Em atraso</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="petVaccineDate">Data da Vacinação *</label>
+          <input type="date" id="petVaccineDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="petDescription">Descrição</label>
+          <textarea id="petDescription" placeholder="Descreva características do pet..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="petImage">Emoji do Pet *</label>
+          <select id="petImage" required>
+            <option value="🐶">🐶 Cachorro</option>
+            <option value="🐱">🐱 Gato</option>
+            <option value="🐰">🐰 Coelho</option>
+            <option value="🐦">🐦 Pássaro</option>
+            <option value="🐹">🐹 Roedor</option>
+            <option value="🦜">🦜 Papagaio</option>
+            <option value="🐢">🐢 Tartaruga</option>
+            <option value="🐠">🐠 Peixe</option>
+          </select>
+        </div>
+
+        <button type="submit" class="primary">Adicionar Pet</button>
+        <button type="button" id="cancelEdit" class="secondary" style="display:none;">Cancelar Edição</button>
+      </form>
+    </div>
+
+    <!-- GRID DE PETS -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+      <h2 style="color: #00ff88; margin: 0;">Pets Disponíveis</h2>
+      <button class="secondary" onclick="changeUser()" style="padding: 8px 16px; font-size: 13px;">👤 Trocar
+        Usuário</button>
+    </div>
+
+    <div class="pets-grid" id="petsGrid">
+      <!-- Preenchido dinamicamente -->
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 PetCare • Desenvolvido por Kawan & Alexandre
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="adocao.js"></script>
+
+</body>
+
+</html>

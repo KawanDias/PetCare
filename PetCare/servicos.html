@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Serviços | PetCare</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="bg"></div>
+  <div class="blur"></div>
+
+  <header>
+
+    <div class="logo">
+      Pet<span>Care</span>
+    </div>
+
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="adocao.html">Adoção</a>
+      <a href="contato.html">Contato</a>
+      <div class="nav-auth" id="navAuth">
+        <button class="nav-link" onclick="openAuthModal('login')">🔐 Login</button>
+        <button class="nav-link" onclick="openAuthModal('register')">✍️ Cadastro</button>
+      </div>
+    </nav>
+
+  </header>
+
+  <!-- MODAL DE AUTENTICAÇÃO -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+
+      <div class="auth-header">
+        <h2 id="modalTitle">Entrar</h2>
+        <p id="modalSubtitle">Acesse sua conta para continuar</p>
+      </div>
+
+      <div id="errorMessage" class="error-message"></div>
+      <div id="successMessage" class="success-message"></div>
+
+      <!-- FORMULÁRIO DE LOGIN -->
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="primary" style="width: 100%; margin-top: 8px;">Entrar</button>
+      </form>
+
+      <!-- FORMULÁRIO DE CADASTRO -->
+      <form id="registerForm" class="auth-form hidden-form">
+        <div class="form-group">
+          <label for="registerName">Nome Completo</label>
+          <input type="text" id="registerName" placeholder="Seu nome aqui" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerPassword">Senha</label>
+          <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6">
+        </div>
+
+        <div class="form-group">
+          <label for="registerPasswordConfirm">Confirmar Senha</label>
+          <input type="password" id="registerPasswordConfirm" placeholder="••••••••" required minlength="6">
+        </div>
+
+        <button type="submit" class="primary" style="width: 100%; margin-top: 8px;">Criar Conta</button>
+      </form>
+
+      <!-- TOGGLE ENTRE LOGIN E CADASTRO -->
+      <div class="auth-toggle">
+        <span id="toggleText">Não tem conta? <a onclick="toggleAuthForms()">Cadastre-se</a></span>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="page">
+
+    <h1 class="page-title">
+      Nossos <span>Serviços</span>
+    </h1>
+
+    <p class="page-description">
+      O PetCare oferece soluções modernas para facilitar o cuidado,
+      gerenciamento e bem-estar dos pets.
+    </p>
+
+    <div class="grid">
+
+      <div class="feature-card">
+        <div class="card-icon">📋</div>
+        <h3>Cadastro Inteligente</h3>
+        <p>
+          Crie perfis completos dos pets com histórico, vacinas e consultas. Organize todos os dados em um único lugar
+          seguro.
+        </p>
+        <div class="card-feature">✓ Perfil completo do pet</div>
+        <div class="card-feature">✓ Histórico de saúde</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">💬</div>
+        <h3>Chat Integrado</h3>
+        <p>
+          Comunicação rápida e direta entre tutores, clínicas e suporte. Tire dúvidas e receba orientações em tempo
+          real.
+        </p>
+        <div class="card-feature">✓ Suporte 24/7</div>
+        <div class="card-feature">✓ Chat instantâneo</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🔔</div>
+        <h3>Sistema de Alertas</h3>
+        <p>
+          Receba notificações automáticas sobre vacinas vencidas, consultas agendadas e lembretes importantes.
+        </p>
+        <div class="card-feature">✓ Notificações inteligentes</div>
+        <div class="card-feature">✓ Lembretes automáticos</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">📱</div>
+        <h3>Interface Responsiva</h3>
+        <p>
+          Utilize o sistema em qualquer dispositivo de maneira fluida. Desktop, tablet ou celular - sempre sincronizado.
+        </p>
+        <div class="card-feature">✓ Mobile first</div>
+        <div class="card-feature">✓ Sincronização automática</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">📊</div>
+        <h3>Relatórios e Análises</h3>
+        <p>
+          Acompanhe o histórico de saúde do seu pet através de relatórios detalhados e gráficos informativos.
+        </p>
+        <div class="card-feature">✓ Gráficos de saúde</div>
+        <div class="card-feature">✓ Exportar relatórios</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🏥</div>
+        <h3>Integração com Clínicas</h3>
+        <p>
+          Conecte com clínicas veterinárias parceiras para agendar consultas e receber registros diretos.
+        </p>
+        <div class="card-feature">✓ Agendamento online</div>
+        <div class="card-feature">✓ Histórico compartilhado</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">❤️</div>
+        <h3>Adoção Responsável</h3>
+        <p>
+          Conectamos tutores responsáveis com pets que precisam de um lar. Processo seguro e confiável.
+        </p>
+        <div class="card-feature">✓ Verificação de tutores</div>
+        <div class="card-feature">✓ Acompanhamento pós-adoção</div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon">🔐</div>
+        <h3>Segurança de Dados</h3>
+        <p>
+          Seus dados e os de seu pet são protegidos com criptografia de ponta. Sua privacidade é nossa prioridade.
+        </p>
+        <div class="card-feature">✓ Criptografia SSL</div>
+        <div class="card-feature">✓ Backup automático</div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 PetCare • Desenvolvido por Kawan & Alexandre
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
