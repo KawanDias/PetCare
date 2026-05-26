@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Adotados | PetCare</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="bg"></div>
+  <div class="blur"></div>
+
+  <header>
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="PetCare"></a>
+
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="adocao.html">Adoção</a>
+      <a href="contato.html">Contato</a>
+      <div class="nav-auth" id="navAuth">
+        <button class="nav-link" onclick="openAuthModal('login')">🔐 Login</button>
+        <button class="nav-link" onclick="openAuthModal('register')">✍️ Cadastro</button>
+      </div>
+    </nav>
+  </header>
+
+  <div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+
+      <div class="auth-header">
+        <h2 id="modalTitle">Entrar</h2>
+        <p id="modalSubtitle">Acesse sua conta para continuar</p>
+      </div>
+
+      <div id="errorMessage" class="error-message"></div>
+      <div id="successMessage" class="success-message"></div>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="primary" style="width: 100%; margin-top: 8px;">Entrar</button>
+      </form>
+
+      <form id="registerForm" class="auth-form hidden-form">
+        <div class="form-group">
+          <label for="registerName">Nome Completo</label>
+          <input type="text" id="registerName" placeholder="Seu nome aqui" required>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Senha</label>
+          <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="registerPasswordConfirm">Confirmar Senha</label>
+          <input type="password" id="registerPasswordConfirm" placeholder="••••••••" required minlength="6">
+        </div>
+        <button type="submit" class="primary" style="width: 100%; margin-top: 8px;">Criar Conta</button>
+      </form>
+
+      <div class="auth-toggle">
+        <span id="toggleText">Não tem conta? <a onclick="toggleAuthForms()">Cadastre-se</a></span>
+      </div>
+    </div>
+  </div>
+
+  <section class="page">
+    <h1 class="page-title">Pets <span>Adotados</span></h1>
+    <p id="adoptionsMessage" class="page-description">Veja aqui os pets que você adotou e clique para ver os detalhes.</p>
+
+    <div class="pets-grid" id="adoptedPetsGrid">
+      <!-- Preenchido dinamicamente -->
+    </div>
+
+    <div class="details-modal" id="petDetailsModal">
+      <div class="details-modal-content">
+        <button class="modal-close" onclick="closePetDetailsModal()">×</button>
+        <div class="details-grid">
+          <div class="details-info">
+            <h2 id="detailName"></h2>
+            <p id="detailDescription"></p>
+            <ul>
+              <li><strong>Espécie:</strong> <span id="detailSpecies"></span></li>
+              <li><strong>Idade:</strong> <span id="detailAge"></span> anos</li>
+              <li><strong>Vacinação:</strong> <span id="detailVaccine"></span></li>
+              <li><strong>Data da vacina:</strong> <span id="detailVaccineDate"></span></li>
+              <li><strong>Adotado por:</strong> <span id="detailAdoptedBy"></span></li>
+              <li><strong>Criador:</strong> <span id="detailCreatedBy"></span></li>
+              <li><strong>Cadastro:</strong> <span id="detailCreatedAt"></span></li>
+            </ul>
+          </div>
+          <div class="photo-gallery" id="detailPhotos"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 PetCare • Desenvolvido por Kawan & Alexandre
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="adocoes.js"></script>
+</body>
+
+</html>

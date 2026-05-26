@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>PetCare</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="bg"></div>
+  <div class="blur"></div>
+
+  <header>
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="PetCare"></a>
+
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="servicos.html">Serviços</a>
+      <a href="adocao.html">Adoção</a>
+      <a href="contato.html">Contato</a>
+      <div class="nav-auth" id="navAuth">
+        <button class="nav-link" onclick="openAuthModal('login')">🔐 Login</button>
+        <button class="nav-link" onclick="openAuthModal('register')">✍️ Cadastro</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MODAL DE AUTENTICAÇÃO -->
+  <div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+      <button class="modal-close" onclick="closeAuthModal()">✕</button>
+
+      <div class="auth-header">
+        <h2 id="modalTitle">Entrar</h2>
+        <p id="modalSubtitle">Acesse sua conta para continuar</p>
+      </div>
+
+      <div id="errorMessage" class="error-message"></div>
+      <div id="successMessage" class="success-message"></div>
+
+      <!-- FORMULÁRIO DE LOGIN -->
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="primary" style="width: 100%; margin-top: 8px;">Entrar</button>
+      </form>
+
+      <!-- FORMULÁRIO DE CADASTRO -->
+      <form id="registerForm" class="auth-form hidden-form">
+        <div class="form-group">
+          <label for="registerName">Nome Completo</label>
+          <input type="text" id="registerName" placeholder="Seu nome aqui" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" placeholder="seu@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerPassword">Senha</label>
+          <input type="password" id="registerPassword" placeholder="••••••••" required minlength="6">
+        </div>
+
+        <div class="form-group">
+          <label for="registerPasswordConfirm">Confirmar Senha</label>
+          <input type="password" id="registerPasswordConfirm" placeholder="••••••••" required minlength="6">
+        </div>
+
+        <button type="submit" class="primary" style="width: 100%; margin-top: 8px;">Criar Conta</button>
+      </form>
+
+      <!-- TOGGLE ENTRE LOGIN E CADASTRO -->
+      <div class="auth-toggle">
+        <span id="toggleText">Não tem conta? <a onclick="toggleAuthForms()">Cadastre-se</a></span>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="hero">
+
+    <div class="hero-text">
+
+      <div class="tag">
+        Plataforma moderna para cuidados pets
+      </div>
+
+      <h1>
+        Cuidando do seu pet de forma <span>inteligente.</span>
+      </h1>
+
+      <p>
+        Gerencie vacinação, adoção, consultas, perfil dos pets e notificações
+        em uma única plataforma moderna, rápida e minimalista.
+      </p>
+
+      <div class="buttons">
+
+        <button class="primary" onclick="entrar()">
+          Começar Agora
+        </button>
+
+        <button class="secondary" onclick="saibaMais()">
+          Saiba Mais
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="recent-carousel">
+      <div class="carousel-header">
+        <div>
+          <h2>Pets cadastrados</h2>
+          <p>Confira os 5 pets mais recentes cadastrados e clique para ver os detalhes.</p>
+        </div>
+      </div>
+
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="recentCarousel" tabindex="0"></div>
+        <button class="carousel-arrow carousel-prev" type="button" onclick="scrollCarousel(-1)">‹</button>
+        <button class="carousel-arrow carousel-next" type="button" onclick="scrollCarousel(1)">›</button>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="features">
+
+    <h2 class="section-title">
+      Recursos da <span>plataforma</span>
+    </h2>
+
+    <div class="grid">
+
+      <div class="feature-card">
+        <h3>📋 Cadastro</h3>
+
+        <p>
+          Crie perfis completos para pets com informações, vacinas e histórico.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>💬 Chat</h3>
+
+        <p>
+          Comunicação rápida entre tutores, clínicas e sistema.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🏠 Adoção</h3>
+
+        <p>
+          Sistema moderno para divulgação e gerenciamento de adoções.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔔 Notificações</h3>
+
+        <p>
+          Alertas automáticos para vacinas, consultas e eventos importantes.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 PetCare • Desenvolvido por Kawan & Alexandre
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
