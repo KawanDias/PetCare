@@ -19,9 +19,7 @@
 
   <header>
 
-    <div class="logo">
-      Pet<span>Care</span>
-    </div>
+    <a href="index.html" class="logo"><img src="img/logo.png" alt="PetCare"></a>
 
     <nav>
       <a href="index.html">Início</a>
@@ -153,6 +151,12 @@
           <textarea id="petDescription" placeholder="Descreva características do pet..."></textarea>
         </div>
 
+        <div class="form-group form-group-full">
+          <label for="petPhotos">Fotos do Pet *</label>
+          <input type="file" id="petPhotos" accept="image/*" multiple required>
+          <p class="file-note">Envie entre 1 e 3 fotos. Elas aparecerão na lista de adoção.</p>
+        </div>
+
         <div class="form-group">
           <label for="petImage">Emoji do Pet *</label>
           <select id="petImage" required>
@@ -161,9 +165,6 @@
             <option value="🐰">🐰 Coelho</option>
             <option value="🐦">🐦 Pássaro</option>
             <option value="🐹">🐹 Roedor</option>
-            <option value="🦜">🦜 Papagaio</option>
-            <option value="🐢">🐢 Tartaruga</option>
-            <option value="🐠">🐠 Peixe</option>
           </select>
         </div>
 
@@ -174,13 +175,33 @@
 
     <!-- GRID DE PETS -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-      <h2 style="color: #00ff88; margin: 0;">Pets Disponíveis</h2>
-      <button class="secondary" onclick="changeUser()" style="padding: 8px 16px; font-size: 13px;">👤 Trocar
-        Usuário</button>
+      <h2 style="color: #ffd34d; margin: 0;">Pets Disponíveis</h2>
     </div>
 
     <div class="pets-grid" id="petsGrid">
       <!-- Preenchido dinamicamente -->
+    </div>
+
+    <div class="details-modal" id="petDetailsModal">
+      <div class="details-modal-content">
+        <button class="modal-close" onclick="closePetDetailsModal()">×</button>
+        <div class="details-grid">
+          <div class="details-info">
+            <h2 id="detailName"></h2>
+            <p id="detailDescription"></p>
+            <ul>
+              <li><strong>Espécie:</strong> <span id="detailSpecies"></span></li>
+              <li><strong>Idade:</strong> <span id="detailAge"></span> anos</li>
+              <li><strong>Vacinação:</strong> <span id="detailVaccine"></span></li>
+              <li><strong>Data da vacina:</strong> <span id="detailVaccineDate"></span></li>
+              <li><strong>Adotado por:</strong> <span id="detailAdoptedBy"></span></li>
+              <li><strong>Criador:</strong> <span id="detailCreatedBy"></span></li>
+              <li><strong>Cadastro:</strong> <span id="detailCreatedAt"></span></li>
+            </ul>
+          </div>
+          <div class="photo-gallery" id="detailPhotos"></div>
+        </div>
+      </div>
     </div>
 
   </section>

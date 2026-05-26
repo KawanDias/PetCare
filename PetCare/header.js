@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', updateHeader);
 //   align-items: center;
 //   gap: 12px;
 //   padding: 8px 16px;
-//   background: rgba(0, 255, 136, 0.1);
+//   background: rgba(255, 211, 77, 0.1);
 //   border-radius: 8px;
 // }
 //
 // .user-name {
-//   color: #00ff88;
+//   color: #ffd34d;
 //   font-weight: 600;
 //   font-size: 14px;
 // }

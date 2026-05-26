@@ -133,7 +133,81 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  renderRecentPetsCarousel();
 });
+
+// FUNÇÕES DO CARROSSEL
+function normalizePetIds() {
+  const pets = JSON.parse(localStorage.getItem('petsCrud') || '[]');
+  let changed = false;
+
+  const normalized = pets.map((pet) => {
+    if (!pet.id) {
+      changed = true;
+      return {
+        ...pet,
+        id: pet.dataCriacao || `${pet.nome}-${pet.data}-${Date.now()}`
+      };
+    }
+    return pet;
+  });
+
+  if (changed) {
+    localStorage.setItem('petsCrud', JSON.stringify(normalized));
+  }
+
+  return normalized;
+}
+
+function renderRecentPetsCarousel() {
+  const carousel = document.getElementById('recentCarousel');
+  if (!carousel) return;
+
+  const pets = normalizePetIds();
+  if (!pets.length) {
+    carousel.innerHTML = '<div class="carousel-empty">Nenhum pet cadastrado ainda. Adicione um pet na página de adoção.</div>';
+    return;
+  }
+
+  const recentPets = [...pets]
+    .sort((a, b) => new Date(b.dataCriacao || b.data).getTime() - new Date(a.dataCriacao || a.data).getTime())
+    .slice(0, 5);
+
+  carousel.innerHTML = recentPets.map((pet) => {
+    const photo = pet.fotos && pet.fotos.length ? `<img src="${pet.fotos[0]}" alt="${pet.nome}">` : `<div class="carousel-placeholder">${pet.emoji}</div>`;
+    return `
+      <div class="carousel-card" onclick="goToPetDetails('${pet.id || pet.dataCriacao || pet.data}')">
+        ${photo}
+        <div>
+          <h3>${pet.nome}</h3>
+          <p>${pet.especie} · ${pet.idade} anos</p>
+          <p class="carousel-meta">${formatDate(pet.data)}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function scrollCarousel(direction) {
+  const track = document.getElementById('recentCarousel');
+  if (!track) return;
+  const cardWidth = track.querySelector('.carousel-card')?.offsetWidth || 260;
+  track.scrollBy({ left: direction * (cardWidth + 20), behavior: 'smooth' });
+}
+
+function goToPetDetails(petId) {
+  localStorage.setItem('selectedPetId', petId);
+  window.location.href = 'adocao.html';
+}
+
+function formatDate(dateString) {
+  if (!dateString) return '';
+  const dateOnly = dateString.split('T')[0];
+  const parts = dateOnly.split('-');
+  if (parts.length !== 3) return dateString;
+  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
 
 // TOGGLE ENTRE FORMULÁRIOS
 function toggleAuthForms() {
@@ -309,6 +383,27 @@ function getCurrentUser() {
   }
 }
 
+function formatDate(dateString) {
+  if (!dateString) return '';
+  const dateOnly = dateString.split('T')[0];
+  const parts = dateOnly.split('-');
+  if (parts.length !== 3) return dateString;
+  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+
+function getAdoptedPetsForCurrentUser() {
+  const user = getCurrentUser();
+  if (!user) return [];
+
+  const pets = JSON.parse(localStorage.getItem('petsCrud')) || [];
+  return pets.filter(pet => {
+    if (pet.adotadoPorId) {
+      return pet.adotadoPorId === user.id;
+    }
+    return pet.adotadoPor === user.name;
+  });
+}
+
 // FAZER LOGOUT
 function logout() {
   if (confirm('Tem certeza que deseja sair?')) {
@@ -329,6 +424,7 @@ function updateNavAuth() {
   if (user) {
     navAuth.innerHTML = `
       <span class="user-info">👤 ${user.name}</span>
+      <a class="nav-link" href="adocoes.html">Minhas Adoções</a>
       <button class="nav-link" onclick="logout()">Sair</button>
     `;
   } else {
